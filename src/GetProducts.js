@@ -1,14 +1,19 @@
-import React, { useEffect } from "react";
-import { useQuery, gql } from "@apollo/client";
-import { LOAD_PRODUCTS } from "./GraphQL/Queries";
+import React, { useEffect, useState } from "react";
+import { CATEGORIES } from "./GraphQL/Queries";
+import { graphql } from "@apollo/client/react/hoc";
 
-const GetProducts = () => {
-  const { error, loading, data } = useQuery(LOAD_PRODUCTS);
+class NavBar extends React.Component {
+  state = {
+    categories: [],
+  };
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-  return <div></div>;
-};
+  render() {
+    console.log(this.props);
+    // console.log(this.props.data.loading);
+    // console.log(this.props.data.categories);
 
-export default GetProducts;
+    return <div>Annie</div>;
+  }
+}
+
+export default graphql(CATEGORIES)(NavBar);
