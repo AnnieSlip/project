@@ -1,28 +1,22 @@
 import { gql } from "@apollo/client";
 
-// export const LOAD_PRODUCTS = gql`
-//   query {
+// export const CATEGORIES = gql`
+//   query categories {
 //     categories {
 //       name
-//       products {
-//         id
-//         name
-//         inStock
-//         gallery
-//         description
-//         category
-//         # attributes,
-//         # prices,
-//         brand
-//       }
 //     }
 //   }
 // `;
 
-export const CATEGORIES = gql`
-  query categories {
+export const NAVBAR_DATA = gql`
+  query navBarData {
     categories {
       name
+    }
+
+    currencies {
+      label
+      symbol
     }
   }
 `;
@@ -43,11 +37,11 @@ export const PRODUCTS = gql`
   }
 `;
 
-export const CURRENCY = gql`
-  query currency {
-    currencies {
-      label
-      symbol
-    }
-  }
-`;
+// export const CURRENCY = gql`
+//   query currency {
+//     currencies {
+//       label
+//       symbol
+//     }
+//   }
+// `;

@@ -7,7 +7,16 @@ import {
 } from "@apollo/client";
 import { ErrorLink, onError } from "@apollo/client/link/error";
 import React from "react";
-import GetProducts from "./GetProducts";
+import NavBar from "./NavBar";
+import { createGlobalStyle } from "styled-components";
+
+const GlobalStyle = createGlobalStyle`
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+`;
 
 const errorLink = onError(({ graphqlErrors, networkError }) => {
   if (graphqlErrors) {
@@ -21,7 +30,6 @@ const link = from([
   errorLink,
   new HttpLink({
     uri: "http://localhost:4000/",
-    // headers: { "Apollo-Require-Preflight": "true" },
   }),
 ]);
 
@@ -34,8 +42,8 @@ class App extends React.Component {
   render() {
     return (
       <ApolloProvider client={client}>
-        <div>Annie</div>
-        <GetProducts />
+        <GlobalStyle />
+        <NavBar />
       </ApolloProvider>
     );
   }
