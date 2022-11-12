@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const Nav = styled.nav`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 10px 80px;
   align-items: center;
 `;
 
@@ -45,16 +46,18 @@ export const Dropdown = styled.div`
   div {
     display: flex;
     justify-content: space-around;
+    gap: 15px;
     align-items: center;
-    width: 100%;
     padding: 7px;
   }
+
   img {
     width: 10px;
   }
 
   ul {
     position: absolute;
+    margin-left: -25px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   }
   li {
@@ -65,4 +68,11 @@ export const Dropdown = styled.div`
   li:hover {
     background-color: #eeeeee;
   }
+`;
+
+export const Wrapper = styled.div`
+  display: flex;
+  width: 7%;
+  justify-content: space-around;
+  align-items: center;
 `;

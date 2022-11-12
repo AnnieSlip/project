@@ -1,7 +1,5 @@
 import React from "react";
-import { NAVBAR_DATA } from "./GraphQL/Queries";
-import { graphql } from "@apollo/client/react/hoc";
-import { Nav, NavButton, Dropdown } from "./NavBar.styles";
+import { Nav, NavButton, Dropdown, Wrapper } from "./Styles/NavBar.styles";
 
 class NavBar extends React.Component {
   state = {
@@ -11,7 +9,7 @@ class NavBar extends React.Component {
   };
 
   showDropdown = () => {
-    console.log(this.state.clicked);
+    // console.log(this.state.clicked);
     this.setState((prevState) => ({
       clicked: !prevState.clicked,
     }));
@@ -23,22 +21,17 @@ class NavBar extends React.Component {
     }));
   };
   render() {
-    console.log(this.props);
-    let categories = this.props.data.categories;
-    let currencies = this.props.data.currencies;
+    return (
+      <Nav>
+        <div>
+          {this.props.categories.map((category, index) => {
+            return <NavButton key={index}>{category.name}</NavButton>;
+          })}
+        </div>
 
-    if (categories && currencies) {
-      return (
-        <Nav>
-          <div>
-            {categories.map((category, index) => {
-              return <NavButton key={index}>{category.name}</NavButton>;
-            })}
-          </div>
+        <img src="../assets/arrow.png" alt="arrow" />
 
-          <img src="../assets/arrow.png" alt="arrow" />
-          <img src="../assets/Empty_Cart.png" alt="Empty Cart" />
-
+        <Wrapper>
           <Dropdown>
             <div onClick={this.showDropdown}>
               <p>{this.state.dropdown_header}</p>
@@ -47,7 +40,7 @@ class NavBar extends React.Component {
 
             {this.state.clicked && (
               <ul>
-                {currencies.map((currency, index) => {
+                {this.props.currencies.map((currency, index) => {
                   const { label, symbol } = currency;
 
                   return (
@@ -59,12 +52,14 @@ class NavBar extends React.Component {
               </ul>
             )}
           </Dropdown>
-        </Nav>
-      );
-    }
 
-    return;
+          <img src="../assets/Empty_Cart.png" alt="Empty Cart" />
+        </Wrapper>
+      </Nav>
+    );
   }
+
+  return;
 }
 
-export default graphql(NAVBAR_DATA)(NavBar);
+export default NavBar;

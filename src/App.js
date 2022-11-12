@@ -1,50 +1,49 @@
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  HttpLink,
-  from,
-} from "@apollo/client";
-import { ErrorLink, onError } from "@apollo/client/link/error";
 import React from "react";
 import NavBar from "./NavBar";
-import { createGlobalStyle } from "styled-components";
-
-const GlobalStyle = createGlobalStyle`
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-`;
-
-const errorLink = onError(({ graphqlErrors, networkError }) => {
-  if (graphqlErrors) {
-    graphqlErrors.map(({ message, location, path }) => {
-      alert(`Graphql error ${message}`);
-    });
-  }
-});
-
-const link = from([
-  errorLink,
-  new HttpLink({
-    uri: "http://localhost:4000/",
-  }),
-]);
-
-const client = new ApolloClient({
-  cache: new InMemoryCache(),
-  link: link,
-});
+import { GlobalStyle } from "./Styles/Globalstyles";
+import { DATA, NAVBAR_DATA } from "./GraphQL/Queries";
+import axios from "axios";
+const URL = "http://localhost:4000/";
 
 class App extends React.Component {
+  state = {
+    categories: [],
+    currencies: [],
+  };
+
+  fetchData = async () => {
+    try {
+      const queryResult = await axios.post(URL, {
+        query: DATA,
+      });
+
+      const result = queryResult.data.data;
+      console.log(result);
+
+      this.setState((prevState) => ({
+        categories: result.categories,
+        currencies: result.currencies,
+      }));
+    } catch (error) {
+      console.log(error.response);
+    }
+    // console.log(this.state.categories);
+    // console.log(this.state.currencies);
+  };
+
+  componentDidMount() {
+    this.fetchData();
+  }
+
   render() {
     return (
-      <ApolloProvider client={client}>
+      <>
         <GlobalStyle />
-        <NavBar />
-      </ApolloProvider>
+        <NavBar
+          categories={this.state.categories}
+          currencies={this.state.currencies}
+        />
+      </>
     );
   }
 }
