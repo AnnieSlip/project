@@ -10,7 +10,6 @@ class NavBar extends React.Component {
   };
 
   showDropdown = () => {
-    // console.log(this.state.clicked);
     this.setState((prevState) => ({
       clicked: !prevState.clicked,
     }));
@@ -26,7 +25,15 @@ class NavBar extends React.Component {
       <Nav>
         <div>
           {this.props.categories.map((category, index) => {
-            return <NavButton key={index}>{category.name}</NavButton>;
+            console.log(category);
+            return (
+              <NavButton
+                key={index}
+                onClick={() => this.props.filterItems(category)}
+              >
+                {category.name}
+              </NavButton>
+            );
           })}
         </div>
 

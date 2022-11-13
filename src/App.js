@@ -15,6 +15,12 @@ class App extends React.Component {
     category: "Tech",
   };
 
+  filterItems = (categoryy) => {
+    this.setState((prevState) => ({
+      products: categoryy.products,
+    }));
+  };
+
   fetchData = async () => {
     try {
       const queryResult = await axios.post(URL, {
@@ -32,7 +38,7 @@ class App extends React.Component {
     } catch (error) {
       console.log(error.response);
     }
-    // console.log(this.state.categories);
+    console.log(this.state.categories);
     // console.log(this.state.currencies);
     console.log(this.state.products);
   };
@@ -48,6 +54,7 @@ class App extends React.Component {
         <NavBar
           categories={this.state.categories}
           currencies={this.state.currencies}
+          filterItems={this.filterItems}
         />
         <CategoryName category={this.state.category} />
 
