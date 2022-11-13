@@ -1,9 +1,9 @@
 import React from "react";
-import NavBar from "./NavBar";
-import Single_Product_Cart from "./SingleProduct_Cart";
-import CategoryName from "./CategoryName";
+import NavBar from "./Components/Navbar";
+import ProductsContainer from "./Components/ProductsContainer";
+import CategoryInput from "./Components/CategoryInput";
 import { GlobalStyle } from "./Styles/Globalstyles";
-import { DATA, NAVBAR_DATA } from "./GraphQL/Queries";
+import { DATA } from "./GraphQL/Queries";
 import axios from "axios";
 const URL = "http://localhost:4000/";
 
@@ -38,9 +38,9 @@ class App extends React.Component {
     } catch (error) {
       console.log(error.response);
     }
-    console.log(this.state.categories);
+    // console.log(this.state.categories);
     // console.log(this.state.currencies);
-    console.log(this.state.products);
+    // console.log(this.state.products);
   };
 
   componentDidMount() {
@@ -56,9 +56,9 @@ class App extends React.Component {
           currencies={this.state.currencies}
           filterItems={this.filterItems}
         />
-        <CategoryName category={this.state.category} />
+        <CategoryInput category={this.state.category} />
 
-        <Single_Product_Cart products={this.state.products} />
+        <ProductsContainer products={this.state.products} />
       </>
     );
   }

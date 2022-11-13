@@ -1,5 +1,5 @@
 import React from "react";
-import { Article, Section } from "./Styles/SingleProduct_Cart.styles";
+import { Article, Section } from "../Styles/ProductContainer.styles";
 
 class Single_Product_Cart extends React.Component {
   render() {

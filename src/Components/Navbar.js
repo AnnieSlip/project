@@ -1,5 +1,5 @@
 import React from "react";
-import { Nav, NavButton, Dropdown, Wrapper } from "./Styles/NavBar.styles";
+import { Nav, NavButton, Dropdown, Wrapper } from "../Styles/Navbar.styles";
 
 class NavBar extends React.Component {
   state = {
