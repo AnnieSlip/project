@@ -6,6 +6,7 @@ class NavBar extends React.Component {
     value: "",
     clicked: false,
     dropdown_header: "$",
+    numItems: 4,
   };
 
   showDropdown = () => {
@@ -53,7 +54,12 @@ class NavBar extends React.Component {
             )}
           </Dropdown>
 
-          <img src="../assets/Empty_Cart.png" alt="Empty Cart" />
+          <div>
+            <img src="../assets/Empty_Cart.png" alt="Empty Cart" />
+            <span>
+              <p>{this.state.numItems}</p>
+            </span>
+          </div>
         </Wrapper>
       </Nav>
     );

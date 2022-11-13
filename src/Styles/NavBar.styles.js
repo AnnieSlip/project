@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
-  padding: 10px 80px;
   align-items: center;
 `;
 
@@ -18,6 +17,8 @@ export const NavButton = styled(Button)`
   text-transform: uppercase;
   background-color: inherit;
   position: relative;
+  font-weight: 500;
+  font-size: 17px;
 
   &::after {
     content: "";
@@ -45,8 +46,8 @@ export const Dropdown = styled.div`
 
   div {
     display: flex;
+    width: 5rem;
     justify-content: space-around;
-    gap: 15px;
     align-items: center;
     padding: 7px;
   }
@@ -57,7 +58,6 @@ export const Dropdown = styled.div`
 
   ul {
     position: absolute;
-    margin-left: -25px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   }
   li {
@@ -72,7 +72,23 @@ export const Dropdown = styled.div`
 
 export const Wrapper = styled.div`
   display: flex;
-  width: 7%;
-  justify-content: space-around;
+  width: 40%;
+  justify-content: flex-end;
+  gap: 10%;
   align-items: center;
+
+  p {
+    font-weight: 600;
+  }
+
+  span {
+    position: absolute;
+    color: white;
+    background-color: black;
+    padding: 6px 10px;
+    border-radius: 50%;
+    text-align: center;
+    top: 1%;
+    right: 3.8%;
+  }
 `;
