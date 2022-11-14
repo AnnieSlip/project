@@ -1,5 +1,6 @@
 import React from "react";
 import { Nav, NavButton, Dropdown, Wrapper } from "../Styles/Navbar.styles";
+import { Link } from "react-router-dom";
 
 class NavBar extends React.Component {
   state = {
@@ -20,12 +21,13 @@ class NavBar extends React.Component {
       dropdown_header: item,
     }));
   };
+
   render() {
     return (
       <Nav>
         <div>
           {this.props.categories.map((category, index) => {
-            console.log(category);
+            // console.log(category);
             return (
               <NavButton
                 key={index}

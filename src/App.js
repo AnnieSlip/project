@@ -2,7 +2,9 @@ import React from "react";
 import NavBar from "./Components/Navbar";
 import ProductsContainer from "./Components/ProductsContainer";
 import CategoryInput from "./Components/CategoryInput";
+import SingleProduct from "./Components/SingleProduct";
 import { GlobalStyle } from "./Styles/Globalstyles";
+
 import { DATA } from "./GraphQL/Queries";
 import axios from "axios";
 const URL = "http://localhost:4000/";
@@ -13,12 +15,24 @@ class App extends React.Component {
     currencies: [],
     products: [],
     category: "Tech",
+    switch: true,
+    id: "",
   };
 
   filterItems = (categoryy) => {
     this.setState((prevState) => ({
       products: categoryy.products,
+      switch: true,
     }));
+  };
+
+  handleClick = (product) => {
+    this.setState((prevState) => ({
+      switch: false,
+      id: product.id,
+    }));
+    console.log(product.id);
+    console.log(this.state);
   };
 
   fetchData = async () => {
@@ -28,7 +42,7 @@ class App extends React.Component {
       });
 
       const result = queryResult.data.data;
-      console.log(result);
+      // console.log(result);
 
       this.setState((prevState) => ({
         categories: result.categories,
@@ -55,10 +69,24 @@ class App extends React.Component {
           categories={this.state.categories}
           currencies={this.state.currencies}
           filterItems={this.filterItems}
+          switch={this.switch}
         />
-        <CategoryInput category={this.state.category} />
+        {this.state.switch === true ? (
+          <>
+            <CategoryInput
+              category={this.state.category}
+              switch={this.state.switch}
+            />
 
-        <ProductsContainer products={this.state.products} />
+            <ProductsContainer
+              products={this.state.products}
+              switch={this.state.switch}
+              handleClick={this.handleClick}
+            />
+          </>
+        ) : (
+          <SingleProduct products={this.state.products} id={this.state.id} />
+        )}
       </>
     );
   }
