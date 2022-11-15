@@ -1,5 +1,5 @@
 import React from "react";
-import { Nav, NavButton, Dropdown, Wrapper } from "../Styles/Navbar.styles";
+import { Nav, NavButton, Wrapper, Dropdown } from "../Styles/Navbar.styles.js";
 import { Link } from "react-router-dom";
 
 class NavBar extends React.Component {
@@ -29,12 +29,11 @@ class NavBar extends React.Component {
           {this.props.categories.map((category, index) => {
             // console.log(category);
             return (
-              <NavButton
-                key={index}
-                onClick={() => this.props.filterItems(category)}
-              >
-                {category.name}
-              </NavButton>
+              <Link key={index} to={`/${category.name}`}>
+                <NavButton onClick={() => this.props.filterItems(category)}>
+                  {category.name}
+                </NavButton>
+              </Link>
             );
           })}
         </div>
@@ -45,7 +44,7 @@ class NavBar extends React.Component {
           <Dropdown>
             <div onClick={this.showDropdown}>
               <p>{this.state.dropdown_header}</p>
-              <img src="../assets/down-arrow.png" />
+              <img src="../assets/down-arrow.png" alt="down-arrow" />
             </div>
 
             {this.state.clicked && (
@@ -73,8 +72,6 @@ class NavBar extends React.Component {
       </Nav>
     );
   }
-
-  return;
 }
 
 export default NavBar;

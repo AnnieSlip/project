@@ -1,7 +1,8 @@
 import React from "react";
 import { Article, Section } from "../Styles/ProductContainer.styles";
+import CategoryInput from "./CategoryInput";
 
-class Single_Product_Cart extends React.Component {
+class ProductsContainer extends React.Component {
   // handleClick = (id) => {
   //   this.setState((prevState) => ({
   //     switch: false,
@@ -16,7 +17,7 @@ class Single_Product_Cart extends React.Component {
           return (
             <Article
               key={product.id}
-              onClick={() => this.props.handleClick(product)}
+              onClick={() => (window.location.href = `/product/${product.id}`)}
             >
               <img src={product.gallery[0]} />
               <h4>{product.name}</h4>
@@ -29,4 +30,4 @@ class Single_Product_Cart extends React.Component {
   }
 }
 
-export default Single_Product_Cart;
+export default ProductsContainer;

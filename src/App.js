@@ -1,10 +1,11 @@
 import React from "react";
+import { Route, Routes } from "react-router-dom";
+// import { filterItems } from "./helper";
 import NavBar from "./Components/Navbar";
 import ProductsContainer from "./Components/ProductsContainer";
 import CategoryInput from "./Components/CategoryInput";
 import SingleProduct from "./Components/SingleProduct";
 import { GlobalStyle } from "./Styles/Globalstyles";
-
 import { DATA } from "./GraphQL/Queries";
 import axios from "axios";
 const URL = "http://localhost:4000/";
@@ -25,7 +26,6 @@ class App extends React.Component {
       switch: true,
     }));
   };
-
   handleClick = (product) => {
     this.setState((prevState) => ({
       switch: false,
@@ -71,22 +71,34 @@ class App extends React.Component {
           filterItems={this.filterItems}
           switch={this.switch}
         />
-        {this.state.switch === true ? (
-          <>
-            <CategoryInput
-              category={this.state.category}
-              switch={this.state.switch}
-            />
 
-            <ProductsContainer
-              products={this.state.products}
-              switch={this.state.switch}
-              handleClick={this.handleClick}
-            />
-          </>
-        ) : (
-          <SingleProduct products={this.state.products} id={this.state.id} />
-        )}
+        <Routes>
+          <Route
+            path="/:category"
+            element={
+              <ProductsContainer
+                products={this.state.products}
+                switch={this.state.switch}
+                handleClick={this.handleClick}
+              />
+            }
+          />
+
+          <Route
+            path="/product/:id"
+            element={<SingleProduct products={this.state.products} />}
+          />
+
+          {/* <ProductsContainer
+            products={this.state.products}
+            switch={this.state.switch}
+            handleClick={this.handleClick}
+          /> */}
+
+          {/* <SingleProduct products={this.state.products} /> */}
+
+          {/* <SingleProduct products={this.state.products} id={this.state.id} /> */}
+        </Routes>
       </>
     );
   }
