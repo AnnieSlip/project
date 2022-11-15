@@ -16,6 +16,7 @@ class NavBar extends React.Component {
     }));
   };
 
+  //Change Currency In Dropdown Header
   handleClick = (item) => {
     this.setState((prevState) => ({
       dropdown_header: item,
@@ -25,9 +26,9 @@ class NavBar extends React.Component {
   render() {
     return (
       <Nav>
+        {/* ROUTES */}
         <div>
           {this.props.categories.map((category, index) => {
-            // console.log(category);
             return (
               <Link key={index} to={`/${category.name}`}>
                 <NavButton onClick={() => this.props.filterItems(category)}>
@@ -37,10 +38,11 @@ class NavBar extends React.Component {
             );
           })}
         </div>
-
+        {/* LOGO */}
         <img src="../assets/arrow.png" alt="arrow" />
 
         <Wrapper>
+          {/* DROPDOWN MENU */}
           <Dropdown>
             <div onClick={this.showDropdown}>
               <p>{this.state.dropdown_header}</p>
@@ -62,6 +64,7 @@ class NavBar extends React.Component {
             )}
           </Dropdown>
 
+          {/* CART ICON (TO TOGGLE CART) */}
           <div>
             <img src="../assets/Empty_Cart.png" alt="Empty Cart" />
             <span>

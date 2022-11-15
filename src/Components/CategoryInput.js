@@ -10,7 +10,7 @@ const Category = styled.h2`
 
 class CategoryName extends React.Component {
   render() {
-    return <Category>{this.props.category}</Category>;
+    return <Category>Category Name</Category>;
   }
 }
 

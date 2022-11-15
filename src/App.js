@@ -1,9 +1,8 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-// import { filterItems } from "./helper";
+import { filterItems } from "./helper";
 import NavBar from "./Components/Navbar";
 import ProductsContainer from "./Components/ProductsContainer";
-import CategoryInput from "./Components/CategoryInput";
 import SingleProduct from "./Components/SingleProduct";
 import { GlobalStyle } from "./Styles/Globalstyles";
 import { DATA } from "./GraphQL/Queries";
@@ -15,26 +14,17 @@ class App extends React.Component {
     categories: [],
     currencies: [],
     products: [],
-    category: "Tech",
-    switch: true,
-    id: "",
   };
 
+  //Filter Products depending on navbar
   filterItems = (categoryy) => {
     this.setState((prevState) => ({
       products: categoryy.products,
       switch: true,
     }));
   };
-  handleClick = (product) => {
-    this.setState((prevState) => ({
-      switch: false,
-      id: product.id,
-    }));
-    console.log(product.id);
-    console.log(this.state);
-  };
 
+  //Fetching data (save data in state)
   fetchData = async () => {
     try {
       const queryResult = await axios.post(URL, {
@@ -42,8 +32,6 @@ class App extends React.Component {
       });
 
       const result = queryResult.data.data;
-      // console.log(result);
-
       this.setState((prevState) => ({
         categories: result.categories,
         currencies: result.currencies,
@@ -52,9 +40,6 @@ class App extends React.Component {
     } catch (error) {
       console.log(error.response);
     }
-    // console.log(this.state.categories);
-    // console.log(this.state.currencies);
-    // console.log(this.state.products);
   };
 
   componentDidMount() {
@@ -69,9 +54,7 @@ class App extends React.Component {
           categories={this.state.categories}
           currencies={this.state.currencies}
           filterItems={this.filterItems}
-          switch={this.switch}
         />
-
         <Routes>
           <Route
             path="/:category"
@@ -79,25 +62,13 @@ class App extends React.Component {
               <ProductsContainer
                 products={this.state.products}
                 switch={this.state.switch}
-                handleClick={this.handleClick}
               />
             }
           />
-
           <Route
             path="/product/:id"
             element={<SingleProduct products={this.state.products} />}
           />
-
-          {/* <ProductsContainer
-            products={this.state.products}
-            switch={this.state.switch}
-            handleClick={this.handleClick}
-          /> */}
-
-          {/* <SingleProduct products={this.state.products} /> */}
-
-          {/* <SingleProduct products={this.state.products} id={this.state.id} /> */}
         </Routes>
       </>
     );
