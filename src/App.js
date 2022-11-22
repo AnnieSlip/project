@@ -14,6 +14,30 @@ class App extends React.Component {
     categories: [],
     currencies: [],
     products: [],
+    currency: "USD",
+    header: "$",
+    selectedItems: 0,
+    selectedProducts: [],
+  };
+
+  //Add selected item
+  // addSelectedItem = () => {
+  //   this.setState((prevState) => ({
+  //     selectedItems: prevState.selectedItems + 1,
+  //   }));
+  //   this.setState((prevState) => ({
+  //     selectedProducts: [this.product],
+  //   }));
+
+  //   console.log(this.selectedProducts);
+  // };
+
+  //Chamge Currency And Dropdown Header
+  changeCurrency = (item) => {
+    this.setState((prevState) => ({
+      currency: item.label,
+      header: item.symbol,
+    }));
   };
 
   //Filter Products depending on navbar
@@ -32,6 +56,7 @@ class App extends React.Component {
       });
 
       const result = queryResult.data.data;
+      // console.log(result);
       this.setState((prevState) => ({
         categories: result.categories,
         currencies: result.currencies,
@@ -54,20 +79,31 @@ class App extends React.Component {
           categories={this.state.categories}
           currencies={this.state.currencies}
           filterItems={this.filterItems}
+          changeCurrency={this.changeCurrency}
+          header={this.state.header}
+          selectedItems={this.state.selectedItems}
         />
+        <div>Annie</div>
         <Routes>
           <Route
             path="/:category"
             element={
               <ProductsContainer
                 products={this.state.products}
-                switch={this.state.switch}
+                currency={this.state.currency}
               />
             }
           />
           <Route
             path="/product/:id"
-            element={<SingleProduct products={this.state.products} />}
+            element={
+              <SingleProduct
+                products={this.state.products}
+                currency={this.state.currency}
+                selectedItems={this.state.selectedItems}
+                addSelectedItem={this.addSelectedItem}
+              />
+            }
           />
         </Routes>
       </>

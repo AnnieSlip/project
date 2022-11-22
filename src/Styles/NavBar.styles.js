@@ -4,6 +4,10 @@ export const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  img {
+    cursor: pointer;
+  }
 `;
 
 export const Button = styled.button`
@@ -53,7 +57,7 @@ export const Dropdown = styled.div`
   }
 
   img {
-    width: 10px;
+    width: 12px;
   }
 
   ul {

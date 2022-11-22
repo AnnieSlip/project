@@ -50,27 +50,22 @@ export const Add_Button = styled(Button)`
     background-color: white;
     border: 2px solid #5ece7b;
   }
-
-  /* &:hover {
-    background-color: white;
-    color: #5ece7b;
-  } */
-`;
-
-export const Size_Button = styled(Button)`
-  border: 1px solid black;
-  padding: 6px 12px;
-  color: black;
-  background-color: inherit;
-  margin-right: 10px;
-  &:hover {
-    color: white;
-    background-color: black;
-  }
 `;
 
 export const Description = styled.div`
   > * {
     margin-bottom: 5%;
+  }
+`;
+
+export const Attribute_btn = styled(Button)`
+  border: 1px solid black;
+  padding: 16px 18px;
+  color: black;
+  background-color: inherit;
+  margin: 20px 10px 10px 0;
+  &:hover {
+    color: white;
+    background-color: black;
   }
 `;

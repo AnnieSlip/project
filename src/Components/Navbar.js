@@ -1,25 +1,17 @@
 import React from "react";
 import { Nav, NavButton, Wrapper, Dropdown } from "../Styles/Navbar.styles.js";
+import CartOverlay from "./CartOverlay.js";
 import { Link } from "react-router-dom";
 
 class NavBar extends React.Component {
   state = {
     value: "",
     clicked: false,
-    dropdown_header: "$",
-    numItems: 4,
   };
 
   showDropdown = () => {
     this.setState((prevState) => ({
       clicked: !prevState.clicked,
-    }));
-  };
-
-  //Change Currency In Dropdown Header
-  handleClick = (item) => {
-    this.setState((prevState) => ({
-      dropdown_header: item,
     }));
   };
 
@@ -45,7 +37,7 @@ class NavBar extends React.Component {
           {/* DROPDOWN MENU */}
           <Dropdown>
             <div onClick={this.showDropdown}>
-              <p>{this.state.dropdown_header}</p>
+              <p>{this.props.header}</p>
               <img src="../assets/down-arrow.png" alt="down-arrow" />
             </div>
 
@@ -55,7 +47,10 @@ class NavBar extends React.Component {
                   const { label, symbol } = currency;
 
                   return (
-                    <li key={index} onClick={() => this.handleClick(label)}>
+                    <li
+                      key={index}
+                      onClick={() => this.props.changeCurrency(currency)}
+                    >
                       {symbol} {label}
                     </li>
                   );
@@ -68,9 +63,11 @@ class NavBar extends React.Component {
           <div>
             <img src="../assets/Empty_Cart.png" alt="Empty Cart" />
             <span>
-              <p>{this.state.numItems}</p>
+              <p>{this.props.selectedItems}</p>
             </span>
           </div>
+
+          <CartOverlay />
         </Wrapper>
       </Nav>
     );
