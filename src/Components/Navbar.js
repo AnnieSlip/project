@@ -7,6 +7,7 @@ class NavBar extends React.Component {
   state = {
     value: "",
     clicked: false,
+    open: false,
   };
 
   showDropdown = () => {
@@ -14,7 +15,11 @@ class NavBar extends React.Component {
       clicked: !prevState.clicked,
     }));
   };
-
+  showOverlay = () => {
+    this.setState((prevState) => ({
+      open: !prevState.open,
+    }));
+  };
   render() {
     return (
       <Nav>
@@ -61,13 +66,17 @@ class NavBar extends React.Component {
 
           {/* CART ICON (TO TOGGLE CART) */}
           <div>
-            <img src="../assets/Empty_Cart.png" alt="Empty Cart" />
+            <img
+              src="../assets/Empty_Cart.png"
+              alt="Empty Cart"
+              onClick={this.showOverlay}
+            />
             <span>
               <p>{this.props.selectedItems}</p>
             </span>
           </div>
 
-          <CartOverlay />
+          {this.state.open && <CartOverlay />}
         </Wrapper>
       </Nav>
     );
