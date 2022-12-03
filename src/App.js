@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { filterItems } from "./helper";
+import CartPage from "./Components/Cart/CartPage";
 import NavBar from "./Components/Navbar";
 import ProductsContainer from "./Components/ProductsContainer";
 import SingleProduct from "./Components/SingleProduct";
@@ -105,6 +105,8 @@ class App extends React.Component {
               />
             }
           />
+
+          <Route path="/cart" element={<CartPage />} />
         </Routes>
       </>
     );
